@@ -149,9 +149,6 @@
         //打开区头悬浮功能(默认关闭)
         layout.sectionHeadersPinToVisibleBounds = YES;
         
-        //暂不支持区尾悬浮(无效设置)
-        //layout.sectionFootersPinToVisibleBounds = YES;
-        
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - 64 - ([UIScreen mainScreen].bounds.size.height >= 812.f ? 24 : 0)) collectionViewLayout:layout];
         _collectionView.delegate = self;_collectionView.dataSource = self;
         [self.view addSubview:_collectionView];
