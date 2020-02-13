@@ -21,7 +21,7 @@
 
 ## 效果展示
 
-#### gif较多, 刚开始网页效果比较卡, 可等待网页全部缓冲, 实际效果完美,  也可以直接下载demo运行.
+#### Gif较多, 刚开始网页效果比较卡, 可等待网页全部缓冲, 实际效果完美,  也可以直接下载demo运行.
 
 <img src="https://github.com/An-iOSer/ZZResources/blob/master/ZZResources/ZZStarView/%E6%98%9F%E6%98%9F%E8%AF%84%E4%BB%B7.gif" width="212" height="350"><img src="https://github.com/An-iOSer/ZZResources/blob/master/ZZResources/ZZLayout/%E5%9E%82%E7%9B%B4.gif" width="212" height="350"><img src="https://github.com/An-iOSer/ZZResources/blob/master/ZZResources/ZZLayout/%E6%B5%AE%E5%8A%A8.gif" width="212" height="350"><img src="https://github.com/An-iOSer/ZZResources/blob/master/ZZResources/ZZLayout/%E6%B7%B7%E5%90%88.GIF" width="212" height="350">
 
