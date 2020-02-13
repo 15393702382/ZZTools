@@ -8,7 +8,7 @@
 ### 导入
 1. 可直接下载demo, 将ZZTools文件夹拖入工程中使用.
 
-2. cocoapods集成可使用: pod 'ZZTools' , 若搜索不到可尝试先使用pod setup更新.
+2. cocoapods集成可使用: pod 'ZZTools' , 若搜索不到可尝试先使用pod setup.
 
 3. 好用的话, 记得留下你的小星星哦!
 
