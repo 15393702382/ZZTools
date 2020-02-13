@@ -423,8 +423,13 @@ static const NSInteger DefaultColumnCpunt = 3;
         if (CGRectIntersectsRect(rect, attr.frame)) {[self.attributesArray addObject:attr];}
     }
     
-    //如果区头不需要悬浮, 直接返回布局对象数组
+    //如果区头不需要悬浮, 直接返回布局对象数组(仅处理区头悬浮)
     if (!self.sectionHeadersPinToVisibleBounds) {return self.attributesArray;}
+    
+    //这里没写, 换用了上面, 其实是禁用了区尾悬浮(解开注释也不支持, 待更新)
+    //if (!self.sectionHeadersPinToVisibleBounds && !self.sectionFootersPinToVisibleBounds) {
+        //return self.attributesArray;
+    //}
     
     //遍历所有区头
     for (UICollectionViewLayoutAttributes *headerAttributes in self.headerArray) {
@@ -469,7 +474,10 @@ static const NSInteger DefaultColumnCpunt = 3;
 
 //这里返回是否浮动区头, 否则不会重复调用.
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBound {
+    //仅处理区头悬浮
     return self.sectionHeadersPinToVisibleBounds;
+    //此处禁用了区尾悬浮(解开注释也不支持, 待更新)
+    //return self.sectionHeadersPinToVisibleBounds || self.sectionFootersPinToVisibleBounds;
 }
 
 #pragma mark - 懒加载
@@ -528,34 +536,4 @@ static const NSInteger DefaultColumnCpunt = 3;
 @implementation ZZCollectionViewLayoutAttributes
 
 @end
-
-//@implementation UICollectionReusableView (ZZLayout)
-//
-//char const ZZ_SECTION;
-//
-//- (void)setZz_section:(NSInteger)zz_section {
-//    objc_setAssociatedObject(self, &ZZ_SECTION, @(zz_section), OBJC_ASSOCIATION_ASSIGN);
-//}
-//
-//- (NSInteger)zz_section {
-//    return [objc_getAssociatedObject(self, &ZZ_SECTION) integerValue];
-//}
-//
-//@end
-//
-//
-//char const ZZ_CELLHEIGHT;
-//
-//@implementation UICollectionViewCell (ZZLayout)
-//
-//
-//- (void)setZz_cellHeight:(CGFloat)zz_cellHeight {
-//    objc_setAssociatedObject(self, &ZZ_CELLHEIGHT, @(zz_cellHeight), OBJC_ASSOCIATION_ASSIGN);
-//}
-//
-//- (CGFloat)zz_cellHeight {
-//    return [objc_getAssociatedObject(self, &ZZ_CELLHEIGHT) floatValue];
-//}
-//
-//@end
 

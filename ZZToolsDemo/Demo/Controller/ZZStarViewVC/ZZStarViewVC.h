@@ -14,4 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+# pragma mark- ZZStarView超出其父视图的使用示例(这里只是在同一个文件写了两个类)
+@interface StarSuperView : UIView
+
+///这里自定义init方法是为了传入预设分数
+- (instancetype)initWithGrade:(CGFloat)grade;
+
+@end
+
 NS_ASSUME_NONNULL_END

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		27E18B62912C88865725476E /* libPods-ZZToolsDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 531B2E0A9E788A0F606AD5F8 /* libPods-ZZToolsDemo.a */; };
-		3A09E55D22A15A9800F462EC /* UIImageView+ZZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A09E55C22A15A9800F462EC /* UIImageView+ZZExtension.m */; };
-		3A09E56022A15C1200F462EC /* UIScrollView+ZZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A09E55F22A15C1200F462EC /* UIScrollView+ZZExtension.m */; };
 		3AA1BAA621F6C61400833ECA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1BAA521F6C61400833ECA /* AppDelegate.m */; };
 		3AA1BAA921F6C61400833ECA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1BAA821F6C61400833ECA /* ViewController.m */; };
 		3AA1BAAC21F6C61400833ECA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AA1BAAA21F6C61400833ECA /* Main.storyboard */; };
@@ -32,10 +30,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3A09E55B22A15A9800F462EC /* UIImageView+ZZExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ZZExtension.h"; sourceTree = "<group>"; };
-		3A09E55C22A15A9800F462EC /* UIImageView+ZZExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ZZExtension.m"; sourceTree = "<group>"; };
-		3A09E55E22A15C1200F462EC /* UIScrollView+ZZExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+ZZExtension.h"; sourceTree = "<group>"; };
-		3A09E55F22A15C1200F462EC /* UIScrollView+ZZExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+ZZExtension.m"; sourceTree = "<group>"; };
 		3AA1BAA121F6C61400833ECA /* ZZToolsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZZToolsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA1BAA421F6C61400833ECA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3AA1BAA521F6C61400833ECA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -100,17 +94,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		3A09E55A22A15A4600F462EC /* ZZExtension */ = {
-			isa = PBXGroup;
-			children = (
-				3A09E55B22A15A9800F462EC /* UIImageView+ZZExtension.h */,
-				3A09E55C22A15A9800F462EC /* UIImageView+ZZExtension.m */,
-				3A09E55E22A15C1200F462EC /* UIScrollView+ZZExtension.h */,
-				3A09E55F22A15C1200F462EC /* UIScrollView+ZZExtension.m */,
-			);
-			path = ZZExtension;
-			sourceTree = "<group>";
-		};
 		3AA1BA9821F6C61400833ECA = {
 			isa = PBXGroup;
 			children = (
@@ -162,7 +145,6 @@
 				E45ED2D722115EB4009D9A8C /* ZZRouter */,
 				3AA1BAD221F6C85200833ECA /* ZZLayout */,
 				E434705E2204580D001584C6 /* ZZStarView */,
-				3A09E55A22A15A4600F462EC /* ZZExtension */,
 			);
 			path = ZZTools;
 			sourceTree = "<group>";
@@ -451,9 +433,7 @@
 				3AA1BACE21F6C71700833ECA /* ZZVerticalVC.m in Sources */,
 				E4984AA622C3BF8A000448B9 /* ZZFPSButton.m in Sources */,
 				3AA1BAA621F6C61400833ECA /* AppDelegate.m in Sources */,
-				3A09E55D22A15A9800F462EC /* UIImageView+ZZExtension.m in Sources */,
 				3AD20664220484050056D3F2 /* ZZStarViewVC.m in Sources */,
-				3A09E56022A15C1200F462EC /* UIScrollView+ZZExtension.m in Sources */,
 				3AA1BACD21F6C71700833ECA /* ZZLayout.m in Sources */,
 				3AA1BAD121F6C71700833ECA /* ZZCollectionHeaderView.m in Sources */,
 			);

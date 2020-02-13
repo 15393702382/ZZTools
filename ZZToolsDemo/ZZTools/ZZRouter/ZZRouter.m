@@ -174,23 +174,22 @@
 # pragma mark- UIViewController
 @implementation UIViewController (ZZRouter)
 
-static char PARAMS;
-static char CALLBACK;
-
-- (void)setParams:(NSDictionary *)params {
-    objc_setAssociatedObject(self, &PARAMS, params, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
+static char PARAMS, CALLBACK;
 
 - (NSDictionary *)params {
     return objc_getAssociatedObject(self, &PARAMS);
 }
 
-- (void)setRouterCallBack:(ZZRouterBlock)routerCallBack {
-    objc_setAssociatedObject(self, &CALLBACK, routerCallBack, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setParams:(NSDictionary *)params {
+    objc_setAssociatedObject(self, &PARAMS, params, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (ZZRouterBlock)routerCallBack {
     return objc_getAssociatedObject(self, &CALLBACK);
+}
+
+- (void)setRouterCallBack:(ZZRouterBlock)routerCallBack {
+    objc_setAssociatedObject(self, &CALLBACK, routerCallBack, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
