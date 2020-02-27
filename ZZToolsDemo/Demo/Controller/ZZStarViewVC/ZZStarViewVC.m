@@ -20,6 +20,7 @@
 
 @implementation ZZStarViewVC
 
+///在load方法中注册路由
 + (void)load {
     [[ZZRouter shared] mapRoute:@"app/demo/starView" toControllerClass:[self class]];//星星评价
 }
