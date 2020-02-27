@@ -6,7 +6,9 @@
 //  Copyright © 2019年 刘猛. All rights reserved.
 //
 
+#import <Masonry.h>
 #import "ZZTools.h"
+#import <SDAutoLayout.h>
 #import "ZZStarViewVC.h"
 
 @interface ZZStarViewVC ()
@@ -23,10 +25,28 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];self.title = @"星星评价";
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     //第一个
+    [self setupFirstStarView];
+
+    //第二个
+    [self setupSecondStarView];
+    
+    //第三个
+    [self setupThirdStarView];
+    
+    //用作标题提示, 与demo使用无关.
+    [self createTitleLabels];
+   
+}
+
+///第一个, 基础用法
+- (void)setupFirstStarView {
+    
     self.starView = [[ZZStarView alloc] initWithImage:[UIImage imageNamed:@"star"] selectImage:[UIImage imageNamed:@"didStar"] starWidth:20 starHeight:20 starMargin:5 starCount:5 callBack:^(CGFloat userGrade, CGFloat finalGrade) {
         NSLog(@"用户实际选择分 === %.2f, 最终分 === %.2f", userGrade, finalGrade);
     }];
@@ -35,27 +55,46 @@
     //设置分值, 可以不写, 默认显示0分.(self.params是UIViewController在ZZRouter中扩展的属性, 包含了所有参数)
     self.starView.grade = [self.params[@"grade1"] floatValue];
     //最小值, 默认0.5可以不写, 用户可以设置的最低分值.
-    self.starView.miniGrade = 0;
-    [self.view addSubview:self.starView];
+    self.starView.miniGrade = 0;[self.view addSubview:self.starView];
+    //设置位置, 定位左上角, 宽高为固定写法
     self.starView.frame = CGRectMake(50, 220, self.starView.bounds.size.width, self.starView.bounds.size.height);
+    
+}
 
-
-    //第二个
-    ZZStarView *starView1 = [[ZZStarView alloc] initWithImage:[UIImage imageNamed:@"star"] selectImage:[UIImage imageNamed:@"didStar"] starWidth:20 starHeight:20 starMargin:5 starCount:10 callBack:^(CGFloat userGrade, CGFloat finalGrade) {
+///第二个, 指明了如何配合屏幕适配框架使用
+- (void)setupSecondStarView {
+    
+    ZZStarView *starView = [[ZZStarView alloc] initWithImage:[UIImage imageNamed:@"star"] selectImage:[UIImage imageNamed:@"didStar"] starWidth:20 starHeight:20 starMargin:5 starCount:10 callBack:^(CGFloat userGrade, CGFloat finalGrade) {
         NSLog(@"用户实际选择分 === %.2f, 最终分 === %.2f", userGrade, finalGrade);
     }];
-    starView1.sublevel = 1;starView1.grade = [self.params[@"grade2"] floatValue];
-    starView1.miniGrade = 2;[self.view addSubview:starView1];
-    starView1.frame = CGRectMake(50, 310, starView1.bounds.size.width, starView1.bounds.size.height);
+    starView.sublevel = 1;starView.grade = [self.params[@"grade2"] floatValue];
+    starView.miniGrade = 2;[self.view addSubview:starView];
     
-    //第三个(指明了如何让ZZStarView自身超出其父视图, 依然有效, 实际使用建议父视图宽高大于ZZStarView)
+    //普通的设置frame用法
+    starView.frame = CGRectMake(50, 310, starView.bounds.size.width, starView.bounds.size.height);
+    
+    /**frame, SDAutoLayout, Masonry任选其一即可
+     //SDAutoLayout用法
+     starView.sd_layout.leftSpaceToView(self.view, 50).topSpaceToView(self.view, 310)
+     .widthIs(starView.bounds.size.width).heightIs(starView.bounds.size.height);
+     
+     //Masonry用法
+     [starView mas_makeConstraints:^(MASConstraintMaker *make) {
+         make.left.equalTo(@50);
+         make.top.equalTo(@310);
+         make.width.equalTo(@(starView.bounds.size.width));
+         make.height.equalTo(@(starView.bounds.size.height));
+     }];
+     */
+    
+}
+
+///第三个(指明了如何让ZZStarView自身超出其父视图, 依然有效, 实际使用建议父视图宽高大于ZZStarView)
+- (void)setupThirdStarView {
+    
     StarSuperView *darkView = [[StarSuperView alloc] initWithGrade:[self.params[@"grade3"] floatValue]];
     [self.view addSubview:darkView];
     
-    
-    //用作标题提示, 与demo使用无关.
-    [self createTitleLabels];
-   
 }
 
 ///用作标题提示, 与demo使用无关.
@@ -92,6 +131,7 @@
     
 }
 
+///在这里给出了通过路由将值反向传出的例子, 一般写在事件内
 - (void)dealloc {
     if (self.routerCallBack) {
         //页面路由反向传值, 字典内请尽量使用json字符串, 避免回传对象, 特别是自定义类的对象, 做到谁使用, 谁解析! 想象成数据使用方调了一个接口, 这里是接口给了返回值.

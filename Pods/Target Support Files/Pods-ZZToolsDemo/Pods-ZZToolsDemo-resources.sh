@@ -46,7 +46,8 @@ case "${TARGETED_DEVICE_FAMILY:-}" in
     ;;
 esac
 
-install_resource() {
+install_resource()
+{
   if [[ "$1" = /* ]] ; then
     RESOURCE_PATH="$1"
   else
@@ -113,7 +114,7 @@ rm -f "$RESOURCES_TO_COPY"
 if [[ -n "${WRAPPER_EXTENSION}" ]] && [ "`xcrun --find actool`" ] && [ -n "${XCASSET_FILES:-}" ]
 then
   # Find all other xcassets (this unfortunately includes those of path pods and other targets).
-  OTHER_XCASSETS=$(find "$PWD" -iname "*.xcassets" -type d)
+  OTHER_XCASSETS=$(find -L "$PWD" -iname "*.xcassets" -type d)
   while read line; do
     if [[ $line != "${PODS_ROOT}*" ]]; then
       XCASSET_FILES+=("$line")
