@@ -90,7 +90,7 @@
     
 }
 
-///第三个(指明了如何让ZZStarView自身超出其父视图, 依然有效, 实际使用建议父视图宽高大于ZZStarView)
+///第三个, 指明了如何让ZZStarView自身超出其父视图, 依然有效, 实际使用建议父视图宽高大于ZZStarView
 - (void)setupThirdStarView {
     
     StarSuperView *darkView = [[StarSuperView alloc] initWithGrade:[self.params[@"grade3"] floatValue]];
