@@ -107,15 +107,20 @@ static const NSInteger DefaultColumnCpunt = 3;
         //1.生成区头
         NSInteger itemCountOfSection = [self.collectionView numberOfItemsInSection:i];
         NSIndexPath *indexPath = [NSIndexPath indexPathWithIndex:i];
-        
-        if ([self.collectionView.dataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
-            UICollectionViewLayoutAttributes *headerAttributs = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:indexPath];
-            if (headerAttributs) {
-                headerAttributs.zIndex = 1;
-                [self.attributesArray addObject:headerAttributs];
-                [self.headerArray addObject:headerAttributs];
-            }
+        UICollectionViewLayoutAttributes *headerAttributs = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:indexPath];
+        if (headerAttributs) {
+            headerAttributs.zIndex = 1;
+            [self.attributesArray addObject:headerAttributs];
+            [self.headerArray addObject:headerAttributs];
         }
+//        if ([self.collectionView.dataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
+//            UICollectionViewLayoutAttributes *headerAttributs = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:indexPath];
+//            if (headerAttributs) {
+//                headerAttributs.zIndex = 1;
+//                [self.attributesArray addObject:headerAttributs];
+//                [self.headerArray addObject:headerAttributs];
+//            }
+//        }
         
         [self.columnDistances removeAllObjects];
         self.lastContentHeight = self.contentDistance;
@@ -134,17 +139,22 @@ static const NSInteger DefaultColumnCpunt = 3;
         }
         
         //4.初始化 footer
-        if ([self.collectionView.dataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
-            UICollectionViewLayoutAttributes *footerAttributes = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter atIndexPath:indexPath];
-            if (footerAttributes) {
-                [self.attributesArray addObject:footerAttributes];
-                [self.footerArray addObject:footerAttributes];
-            }
+        UICollectionViewLayoutAttributes *footerAttributes = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter atIndexPath:indexPath];
+        if (footerAttributes) {
+            [self.attributesArray addObject:footerAttributes];
+            [self.footerArray addObject:footerAttributes];
         }
+//        if ([self.collectionView.dataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
+//            UICollectionViewLayoutAttributes *footerAttributes = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter atIndexPath:indexPath];
+//            if (footerAttributes) {
+//                [self.attributesArray addObject:footerAttributes];
+//                [self.footerArray addObject:footerAttributes];
+//            }
+//        }
         
         //5.修改分区颜色
         CGRect sectionFrame = firstAttributes.frame;CGSize footSize = CGSizeZero;
-        if ([self.delegate respondsToSelector:@selector(layout:referenceSizeForFooterInSection:)]) {
+        if ([self.delegate respondsToSelector:@selector(layout:referenceSizeForFooterInSection:)] && [self.collectionView.dataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
             footSize = [self.delegate layout:self referenceSizeForFooterInSection:i];
         }
         
@@ -356,7 +366,7 @@ static const NSInteger DefaultColumnCpunt = 3;
     
     if ([elementKind isEqualToString:UICollectionElementKindSectionHeader]) {
         
-        if ([_delegate respondsToSelector:@selector(layout:referenceSizeForHeaderInSection:)]) {
+        if ([_delegate respondsToSelector:@selector(layout:referenceSizeForHeaderInSection:)] && [self.collectionView.dataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
             self.headerReferenceSize = [_delegate layout:self referenceSizeForHeaderInSection:indexPath.section];
         } else {
             self.headerReferenceSize = CGSizeMake(self.collectionView.bounds.size.width, 0.001);
@@ -376,7 +386,7 @@ static const NSInteger DefaultColumnCpunt = 3;
             self.contentDistance += self.headerReferenceSize.width;
         }
         
-    } else if ([elementKind isEqualToString:UICollectionElementKindSectionFooter]) {
+    } else if ([elementKind isEqualToString:UICollectionElementKindSectionFooter] && [self.collectionView.dataSource respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
         
         if ([_delegate respondsToSelector:@selector(layout:referenceSizeForFooterInSection:)]) {
             self.footerReferenceSize = [_delegate layout:self referenceSizeForFooterInSection:indexPath.section];

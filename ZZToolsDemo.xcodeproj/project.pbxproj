@@ -20,6 +20,7 @@
 		3AA1BAD021F6C71700833ECA /* ZZAutomateFloatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1BAC821F6C71700833ECA /* ZZAutomateFloatVC.m */; };
 		3AA1BAD121F6C71700833ECA /* ZZCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1BACC21F6C71700833ECA /* ZZCollectionHeaderView.m */; };
 		3AD20664220484050056D3F2 /* ZZStarViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E43470642204587A001584C6 /* ZZStarViewVC.m */; };
+		C1F0CEC2258F5F830047A430 /* ZZTools.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C1F0CEC1258F5F830047A430 /* ZZTools.podspec */; };
 		E42827D92206BB7200BF7657 /* ZZCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E42827D82206BB7200BF7657 /* ZZCollectionViewCell.m */; };
 		E42827DD2206BD2900BF7657 /* ZZModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E42827DC2206BD2900BF7657 /* ZZModel.m */; };
 		E42827E02206D61D00BF7657 /* ZZCollectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E42827DF2206D61D00BF7657 /* ZZCollectionFooterView.m */; };
@@ -53,6 +54,7 @@
 		3AA1BAD321F6C94700833ECA /* ZZTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZTools.h; sourceTree = "<group>"; };
 		531B2E0A9E788A0F606AD5F8 /* libPods-ZZToolsDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZZToolsDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		817DC901F7C64119D1FE199A /* Pods-ZZToolsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZZToolsDemo.release.xcconfig"; path = "Target Support Files/Pods-ZZToolsDemo/Pods-ZZToolsDemo.release.xcconfig"; sourceTree = "<group>"; };
+		C1F0CEC1258F5F830047A430 /* ZZTools.podspec */ = {isa = PBXFileReference; lastKnownFileType = file; path = ZZTools.podspec; sourceTree = SOURCE_ROOT; };
 		E42827D72206BB7200BF7657 /* ZZCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZCollectionViewCell.h; sourceTree = "<group>"; };
 		E42827D82206BB7200BF7657 /* ZZCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZCollectionViewCell.m; sourceTree = "<group>"; };
 		E42827DB2206BD2900BF7657 /* ZZModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZModel.h; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				3AA1BAAF21F6C61500833ECA /* LaunchScreen.storyboard */,
 				3AA1BAB221F6C61500833ECA /* Info.plist */,
 				3AA1BAB321F6C61500833ECA /* main.m */,
+				C1F0CEC1258F5F830047A430 /* ZZTools.podspec */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1F0CEC2258F5F830047A430 /* ZZTools.podspec in Resources */,
 				3AA1BAB121F6C61500833ECA /* LaunchScreen.storyboard in Resources */,
 				3AA1BAAE21F6C61500833ECA /* Assets.xcassets in Resources */,
 				3AA1BAAC21F6C61400833ECA /* Main.storyboard in Resources */,
