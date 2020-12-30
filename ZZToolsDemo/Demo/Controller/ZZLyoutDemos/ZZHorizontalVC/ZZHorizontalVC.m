@@ -71,7 +71,7 @@
         headerView.label.text = [NSString stringWithFormat:@"    %ld",indexPath.section];
         
         if (indexPath.section % 2 == 0) {
-            headerView.backgroundColor = [UIColor yellowColor];
+            headerView.backgroundColor = [UIColor cyanColor];
         } else {
             headerView.backgroundColor = [UIColor purpleColor];
         }
@@ -89,7 +89,7 @@
 //瀑布流协议方法
 - (CGFloat)layout:(ZZLayout *)layout widthForRowAtIndexPath:(NSIndexPath *)indexPath {//返回item的宽
     ZZModel *model = self.modelArrays[indexPath.section][indexPath.row];
-    return model.cellHeight;
+    return model.height;
 }
 
 - (NSInteger)layout:(ZZLayout *)layout columnNumberAtSection:(NSInteger)section {//每个区有几列(横向的列)
@@ -167,7 +167,7 @@
             int count = rand() % 31 + 20;
             for (int j = 0; j < count; j ++) {
                 ZZModel *model = [[ZZModel alloc] init];
-                model.cellHeight = rand() % 100 + 80;
+                model.height = rand() % 100 + 80;
                 [array addObject:model];
             }
             

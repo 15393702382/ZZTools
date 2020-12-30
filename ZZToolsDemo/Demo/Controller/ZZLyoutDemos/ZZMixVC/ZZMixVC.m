@@ -18,7 +18,7 @@
 @property (nonatomic , strong) UICollectionView *collectionView;
 
 /**数据数组*/
-@property (nonatomic , strong) NSMutableArray   *models;
+@property (nonatomic , strong) NSMutableArray   *modelArrays;
 
 
 @end
@@ -45,25 +45,22 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     ZZCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ZZCollectionViewCell" forIndexPath:indexPath];
-    
+    ZZModel *model = self.modelArrays[indexPath.section][indexPath.row];
+    cell.backgroundColor = model.color;
     cell.title = [NSString stringWithFormat:@"第%ld个", indexPath.row];
-    int r = rand() % 255;
-    int g = rand() % 255;
-    int b = rand() % 255;
-    cell.backgroundColor = [UIColor colorWithRed:r / 255.0 green:g / 255.0 blue:b / 255.0 alpha:1];
-    
     return cell;
     
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return random() % 20 + 30;
+    NSArray *arr = self.modelArrays[section];
+    return arr.count;
     
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 5;
+    return self.modelArrays.count;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
@@ -85,14 +82,27 @@
 
 //ZZLyout的流协议方法
 - (CGFloat)layout:(ZZLayout *)layout heightForRowAtIndexPath:(NSIndexPath *)indexPath {//返回item的高
-    if (indexPath.section % 2 == 0) {
-        return 30;
-    }
-    return random() % 120 + 20;//同一section下请不要改变高度.
+    
+    //浮动瀑布流同一section下请不要改变高度.
+    if (indexPath.section % 2 == 0) {return 30;}
+    
+    //垂直瀑布流
+    ZZModel *model = self.modelArrays[indexPath.section][indexPath.row];
+    return model.height;
+    
 }
 
 - (CGFloat)layout:(ZZLayout *)layout widthForRowAtIndexPath:(NSIndexPath *)indexPath {//返回item的宽
-    return random() % 120 + 60;//这里可以根据内容传入任意宽度
+    
+    //浮动瀑布
+    if (indexPath.section % 2 == 0) {
+        ZZModel *model = self.modelArrays[indexPath.section][indexPath.row];
+        return model.width;
+    }
+    
+    //垂直瀑布流宽度会自动计算的, 返回任意值即可
+    return 0;
+    
 }
 
 - (UIEdgeInsets)layout:(ZZLayout *)layout insetForSectionAtIndex:(NSInteger)section {//设置每个区的边距
@@ -149,8 +159,11 @@
         //配合MJRefresh可这么使用.
         __weak typeof(self)weakSelf = self;
         MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            [weakSelf.collectionView.mj_header endRefreshing];
-            [weakSelf.collectionView reloadData];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                weakSelf.modelArrays = nil;
+                [weakSelf.collectionView.mj_header endRefreshing];
+                [weakSelf.collectionView reloadData];
+            });
         }];
         
         header.ignoredScrollViewContentInsetTop = 200;
@@ -169,6 +182,27 @@
         
     }
     return _collectionView;
+}
+
+- (NSMutableArray *)modelArrays {
+    if (!_modelArrays) {
+        _modelArrays = [[NSMutableArray alloc] init];
+        for (int i = 0; i < 5; i ++) {
+            
+            NSMutableArray *array = [[NSMutableArray alloc] init];
+            int count = rand() % 31 + 20;
+            for (int j = 0; j < count; j ++) {
+                ZZModel *model = [[ZZModel alloc] init];
+                model.width = rand() % 100 + 80;
+                model.height = rand() % 100 + 80;
+                model.color = [UIColor colorWithRed:(rand() % 255) / 255.0 green:(rand() % 255) / 255.0 blue:(rand() % 255) / 255.0 alpha:1];
+                [array addObject:model];
+            }
+            [_modelArrays addObject:array];
+            
+        }
+    }
+    return _modelArrays;
 }
 
 @end

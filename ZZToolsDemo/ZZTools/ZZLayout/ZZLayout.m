@@ -346,16 +346,15 @@ static const NSInteger DefaultColumnCpunt = 3;
         currentFrame.size.width = cellWidth;
         currentFrame.size.height = cellHeight;
         attributes.frame = currentFrame;
-        
-    } else {///在同一行
+    } else {//在同一行
         currentFrame.origin.x = CGRectGetMaxX(lastFrame) + self.interitemSpacing;
         currentFrame.origin.y = lastFrame.origin.y;
         currentFrame.size.width = cellWidth;
         currentFrame.size.height = cellHeight;
         attributes.frame = currentFrame;
-        
     }
     self.contentDistance = CGRectGetMaxY(attributes.frame);
+    
     return attributes;
 }
 

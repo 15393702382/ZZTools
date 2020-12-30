@@ -36,11 +36,6 @@
     [self.collectionView reloadData];
 }
 
-- (void)loadData {
-    [self.collectionView.mj_header endRefreshing];
-    [self.collectionView reloadData];
-}
-
 #pragma mark- 协议方法
 //collectionView的协议方法
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -83,10 +78,7 @@
     model.title = [NSString stringWithFormat:@"第%ld个", indexPath.row];
     cell.model = model;
     //3.随机颜色, 实际开发中用不到
-    int r = rand() % 255;
-    int g = rand() % 255;
-    int b = rand() % 255;
-    cell.backgroundColor = [UIColor colorWithRed:r / 255.0 green:g / 255.0 blue:b / 255.0 alpha:1];
+    cell.backgroundColor = model.color;
     
     //4.返回cell
     return cell;
@@ -96,7 +88,7 @@
 //ZZLyout的流协议方法
 - (CGFloat)layout:(ZZLayout *)layout heightForRowAtIndexPath:(NSIndexPath *)indexPath {//返回item的高
     ZZModel *model = self.modelArrays[indexPath.section][indexPath.row];
-    return model.cellHeight;
+    return model.height;
 }
 
 - (NSInteger)layout:(ZZLayout *)layout columnNumberAtSection:(NSInteger)section {//每个区有几列
@@ -165,7 +157,13 @@
         
         //配合MJRefresh可这么使用.
         __weak typeof(self)weakSelf = self;
-        MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingBlock:^{[weakSelf loadData];}];
+        MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                weakSelf.modelArrays = nil;
+                [weakSelf.collectionView.mj_header endRefreshing];
+                [weakSelf.collectionView reloadData];
+            });
+        }];
         header.ignoredScrollViewContentInsetTop = 200;
         _collectionView.mj_header = header;
         
@@ -192,14 +190,13 @@
         for (int i = 0; i < 5; i ++) {
             
             NSMutableArray *array = [[NSMutableArray alloc] init];
-            
-            int count = rand() % 6 + 7;
+            int count = rand() % 6 + 10;
             for (int j = 0; j < count; j ++) {
                 ZZModel *model = [[ZZModel alloc] init];
-                model.cellHeight = rand() % 100 + 60;
+                model.height = rand() % 100 + 60;
+                model.color = [UIColor colorWithRed:(rand() % 255) / 255.0 green:(rand() % 255) / 255.0 blue:(rand() % 255) / 255.0 alpha:1];
                 [array addObject:model];
             }
-            
             [_modelArrays addObject:array];
             
         }

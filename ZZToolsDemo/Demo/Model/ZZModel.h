@@ -17,7 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,   copy) NSString *title;
 
 /**cell的高*/
-@property (nonatomic , assign) CGFloat  cellHeight;
+@property (nonatomic , assign) CGFloat  height;
+
+/**cell的款, 浮动瀑布流用到*/
+@property (nonatomic , assign) CGFloat  width;
+
+/**cell的颜色*/
+@property (nonatomic , strong) UIColor  *color;
 
 @end
 
